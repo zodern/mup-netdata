@@ -1,0 +1,27 @@
+{
+  "name": "mup-netdata",
+  "version": "0.1.0",
+  "description": "Plugin for Meteor Up to setup NetData",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "author": "zodern",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zodern/mup-server-security.git"
+  },
+  "keywords": [
+    "meteor-up",
+    "netdata"
+  ],
+  "homepage": "https://github.com/zodern/mup-server-security",
+  "bugs": "https://github.com/zodern/mup-server-security/issues",
+  "dependencies": {
+    "joi": "^10.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
