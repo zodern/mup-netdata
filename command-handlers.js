@@ -95,7 +95,7 @@ function setupSlaves (api, nodemiral, masterName) {
   });
 
   return api.runTaskList(taskList, sessions, {
-    series: false,
+    series: true,
     verbose: api.getVerbose()
   });
 }
