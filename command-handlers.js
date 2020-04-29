@@ -103,7 +103,7 @@ function setupSlaves (api, nodemiral, masterName) {
 
 module.exports = {
   async setup (api, nodemiral) {
-    const netdataConfig = api.getconfig().netdata;
+    const netdataConfig = api.getConfig().netdata;
     if (!netdataConfig) {
       console.log(
         'Not setting up netdata since there is no config'
