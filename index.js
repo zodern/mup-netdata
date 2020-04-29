@@ -9,6 +9,10 @@ module.exports = {
       description: 'Sets up netdata',
       handler: commandHandlers.setup
     },
+    'error-logs': {
+      description: 'Shows netdata error logs',
+      handler: commandHandlers.errorLogs
+    }
   },
   validate: {
     netdata: validate

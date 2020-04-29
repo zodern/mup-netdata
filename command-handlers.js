@@ -117,5 +117,21 @@ module.exports = {
 
     await setupMaster(api, nodemiral, masterName);
     await setupSlaves(api, nodemiral, masterName);
+  },
+  async errorLogs (api) {
+    const servers = api.getConfig().netdata.servers;
+    const serverNames = Object.keys(servers);
+
+    for (let i = 0; i < serverNames.length; i++) {
+      const [ session ] = api.getSessionsForServers([serverNames[i]]);
+      if (!session) {
+        // server was excluded by --servers option
+        continue;
+      }
+
+      console.log(`--------- Logs for ${serverNames[i]} ---------`);
+      const result = await api.runSSHCommand(session, 'tail /var/log/netdata/error.log -n 100');
+      console.log(result.output);
+    }
   }
 };
