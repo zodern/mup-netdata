@@ -1,3 +1,5 @@
+const uuid = require('uuid');
+
 function addSharedSetupTasks (taskList, api) {
   taskList.executeScript('Restart Netdata', {
     script: api.resolvePath(__dirname, './assets/restart.sh')
@@ -108,6 +110,9 @@ function setupSlaves (api, nodemiral, masterName) {
 
 
 module.exports = {
+  generateApiKey () {
+    console.log(uuid.v4());
+  },
   async setup (api, nodemiral) {
     const netdataConfig = api.getConfig().netdata;
     if (!netdataConfig) {

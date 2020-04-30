@@ -12,6 +12,10 @@ module.exports = {
     'error-logs': {
       description: 'Shows netdata error logs',
       handler: commandHandlers.errorLogs
+    },
+    'generate-api-key': {
+      description: 'Create a random api key in correct format',
+      handler: commandHandlers.generateApiKey
     }
   },
   validate: {

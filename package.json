@@ -19,7 +19,8 @@
   "homepage": "https://github.com/zodern/mup-netdata",
   "bugs": "https://github.com/zodern/mup-netdata/issues",
   "dependencies": {
-    "joi": "^10.6.0"
+    "joi": "^10.6.0",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "eslint": "^6.8.0"
