@@ -1,3 +1,14 @@
+function addSharedSetupTasks (taskList, api) {
+  taskList.executeScript('Restart Netdata', {
+    script: api.resolvePath(__dirname, './assets/restart.sh')
+  });
+
+  taskList.copy('Copy python.d.conf', {
+    src: api.resolvePath(__dirname, './assets/python.d.conf'),
+    dest: '/etc/netdata/python.d.conf'
+  });
+}
+
 function setupMaster(api, nodemiral, masterName) {
   let {
     netdata
@@ -40,10 +51,7 @@ function setupMaster(api, nodemiral, masterName) {
     }
   });
 
-  taskList.executeScript('Restart Netdata', {
-    script: api.resolvePath(__dirname, './assets/restart.sh')
-  });
-
+  addSharedSetupTasks(taskList, api);
 
   return api.runTaskList(taskList, masterSession, {
     series: false,
@@ -90,12 +98,10 @@ function setupSlaves (api, nodemiral, masterName) {
     }
   });
 
-  taskList.executeScript('Restart Netdata', {
-    script: api.resolvePath(__dirname, './assets/restart.sh')
-  });
+  addSharedSetupTasks(taskList, api);
 
   return api.runTaskList(taskList, sessions, {
-    series: true,
+    series: false,
     verbose: api.getVerbose()
   });
 }
