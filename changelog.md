@@ -1,3 +1,7 @@
+## 0.3.1 May 12, 2020
+
+- Fix slack alerts
+
 ## 0.3.0 April 30, 2020
 
 - Fix documentation for apiKey
