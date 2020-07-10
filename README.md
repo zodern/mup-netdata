@@ -16,18 +16,26 @@ module.exports = {
   plugins: ['netdata'],
   netdata: {
     servers: {
-      one: {},
-      two: {},
       netdataMaster: {
         // One server must be a master. All other servers send their metrics
         // to this one.
         master: true
-      }
+      },
+      one: {},
+      two: {
+        // Send alerts about this server to Slack
+        // Default is true
+        alarms: false,
+      },
     },
     // Key used for authentication with the master instance in the GUID format.
     // Run `mup netdata generate-api-key` to get a random key
+    // This option is Required
     apiKey: '630eb68f-e0fa-5ecc-887a-7c7a62614681',
 
+    // The rest of the options are optional
+
+    // Receive alerts in slack
     slack: {
       // Create an incoming webhook using the "Incoming Webhooks" App: https://slack.com/apps/A0F7XDUAZ-incoming-webhooks
       webhookUrl: 'https://hooks.slack.com/services/example/example',
@@ -35,7 +43,14 @@ module.exports = {
       // - '#channel'
       // - '@user'
       recipient: '#system-status'
-    }
+    },
+
+    // How often metrics are collected, in seconds. Default is 1
+    updateEvery: 1,
+
+    // Disk space used per server to store metrics, in megabytes. Defaults to 512
+    // Set to a smaller size to reduce memory usage
+    dbEngineDiskSpace: 512,
   }
 }
 ```
