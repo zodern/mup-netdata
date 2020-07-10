@@ -33,7 +33,11 @@ function setupMaster(api, nodemiral, masterName) {
 
   taskList.copy('Copy Netdata Config', {
     src: api.resolvePath(__dirname, './assets/netdata-master.conf'),
-    dest: '/etc/netdata/netdata.conf'
+    dest: '/etc/netdata/netdata.conf',
+    vars: {
+      updateEvery: netdata.updateEvery || 1,
+      dbEngineDiskSpace: netdata.dbEngineDiskSpace || 512
+    }
   });
 
   taskList.copy('Copy Stream Config', {
@@ -64,7 +68,8 @@ function setupMaster(api, nodemiral, masterName) {
 function setupSlaves (api, nodemiral, masterName) {
   const {
     apiKey,
-    servers: netdataServers
+    servers: netdataServers,
+    updateEvery
   } = api.getConfig().netdata;
   const servers = api.getConfig().servers;
 
@@ -87,7 +92,10 @@ function setupSlaves (api, nodemiral, masterName) {
 
   taskList.copy('Copy Netdata Config', {
     src: api.resolvePath(__dirname, './assets/netdata-slave.conf'),
-    dest: '/etc/netdata/netdata.conf'
+    dest: '/etc/netdata/netdata.conf',
+    vars: {
+      updateEvery: updateEvery || 1
+    }
   });
 
   taskList.copy('Copy Stream Config', {

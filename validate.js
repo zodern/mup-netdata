@@ -8,7 +8,9 @@ var schema = joi.object().keys({
     webhookUrl: joi.string(),
     recipient: joi.string()
   }),
-  apiKey: joi.string().required()
+  apiKey: joi.string().required(),
+  updateEvery: joi.number(),
+  dbEngineDiskSpace: joi.number()
 });
 
 module.exports = function(config, utils) {
