@@ -2,7 +2,8 @@ var joi = require('joi');
 
 var schema = joi.object().keys({
   servers: joi.object().keys().pattern(/.*/, {
-    master: joi.bool()
+    master: joi.bool(),
+    alarms: joi.bool(),
   }),
   slack: joi.object().keys({
     webhookUrl: joi.string(),

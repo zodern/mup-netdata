@@ -1,5 +1,14 @@
 const uuid = require('uuid');
 
+function apiKeys (key) {
+  // Replace the last character to create different keys
+  const baseKey = key.slice(0, -1);
+  return {
+    defaultKey: baseKey + '0',
+    noAlarmsKey: baseKey + 'a',
+  };
+}
+
 function addSharedSetupTasks (taskList, api) {
   taskList.executeScript('Restart Netdata', {
     script: api.resolvePath(__dirname, './assets/restart.sh')
@@ -15,6 +24,10 @@ function setupMaster(api, nodemiral, masterName) {
   let {
     netdata
   } = api.getConfig();
+  const {
+    defaultKey,
+    noAlarmsKey,
+  } = apiKeys(netdata.apiKey);
 
   const {
     webhookUrl: slackWebhookUrl,
@@ -44,7 +57,8 @@ function setupMaster(api, nodemiral, masterName) {
     src: api.resolvePath(__dirname, './assets/stream-master.conf'),
     dest: '/etc/netdata/stream.conf',
     vars: {
-      apiKey: netdata.apiKey,
+      defaultKey,
+      noAlarmsKey 
     }
   });
 
@@ -98,9 +112,27 @@ function setupSlaves (api, nodemiral, masterName) {
     }
   });
 
+  const {
+    defaultKey,
+    noAlarmsKey,
+  } = apiKeys(apiKey);
+
+  const hostVars = {};
+  slaveNames.forEach(name => {
+    const host = servers[name].host;
+    hostVars[host] = {
+      apiKey: defaultKey,
+    };
+
+    if (!netdataServers[name].alarms) {
+      hostVars[host].apiKey = noAlarmsKey;
+    }
+  });
+
   taskList.copy('Copy Stream Config', {
     src: api.resolvePath(__dirname, './assets/stream-slave.conf'),
     dest: '/etc/netdata/stream.conf',
+    hostVars,
     vars: {
       apiKey,
       // TODO: should prefer the private IP address
