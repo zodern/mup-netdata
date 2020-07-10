@@ -1,3 +1,9 @@
+## 0.4.0 July 9, 2020
+
+- Add option to disable alarms for specific servers
+- Add updateEvery option
+- Add dbEngineDiskSpace option
+
 ## 0.3.1 May 12, 2020
 
 - Fix slack alerts
