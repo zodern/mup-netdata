@@ -48,8 +48,7 @@ module.exports = {
     // How often metrics are collected, in seconds. Default is 1
     updateEvery: 1,
 
-    // Disk space used per server to store metrics, in megabytes. Defaults to 512
-    // Set to a smaller size to reduce memory usage
+    // Disk space used to store metrics, in megabytes. Defaults to 512
     dbEngineDiskSpace: 512,
   }
 }
