@@ -1,3 +1,7 @@
+## 0.4.1 August 27, 2020
+
+- Switch to using Netdata's new `dbengine multihost disk space` option
+
 ## 0.4.0 July 9, 2020
 
 - Add option to disable alarms for specific servers
