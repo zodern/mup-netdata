@@ -1,3 +1,8 @@
+## 0.4.2 March 28, 2022
+
+- Fix for new netdata install location
+- Restart netdata after updating python config instead of before
+
 ## 0.4.1 August 27, 2020
 
 - Switch to using Netdata's new `dbengine multihost disk space` option
