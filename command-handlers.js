@@ -10,13 +10,13 @@ function apiKeys (key) {
 }
 
 function addSharedSetupTasks (taskList, api) {
-  taskList.executeScript('Restart Netdata', {
-    script: api.resolvePath(__dirname, './assets/restart.sh')
-  });
-
   taskList.copy('Copy python.d.conf', {
     src: api.resolvePath(__dirname, './assets/python.d.conf'),
     dest: '/etc/netdata/python.d.conf'
+  });
+
+  taskList.executeScript('Restart Netdata', {
+    script: api.resolvePath(__dirname, './assets/restart.sh')
   });
 }
 
